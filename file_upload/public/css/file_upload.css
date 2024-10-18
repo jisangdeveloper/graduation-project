@@ -67,6 +67,8 @@ a {
 }
 
 #link-box {
+    max-height: 300px; /* 고정 높이 설정 */
+    overflow-y: auto; /* 세로 스크롤 활성화 */
     margin-top: 20px;
     display: none;
     font-size: 14px;

@@ -66,6 +66,7 @@ async function handleFiles(files) {
         //에러 처리
         if(result.state=='err'){
             if(result.code=='unknown'){
+                console.log(result);
                 throw new Error("알수없는 에러가 발생했습니다. 관리자에게 문의해주세요.")
             }else{
                 throw new Error(result.msg)

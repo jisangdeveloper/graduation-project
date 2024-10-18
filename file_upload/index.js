@@ -12,30 +12,13 @@ app.use('/file', express.static(path.join(__dirname, 'upload')));
 
 // index.html 파일 제공
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'file_upload.html'));
 });
 
 app.get('/file-upload', (req, res) => {
     res.sendFile(path.join(__dirname, 'file_upload.html'));
 });
-  
-// 파일 한개 업로드 처리
-app.post('/api/upload', upload.single('uploadfiles'), (req, res) => {
-       
-    if (!req.file) {
-        return res.status(400).send('No file uploaded.');
-    }
 
-    res.json({ state: 'success', data: parseFile(req.file)});
-  }, uploadErrorHandler);
-
-// 다중 파일 업로드 처리
-app.post('/api/uploads', upload.array('uploadfiles',12), (req, res) => { 
-    if (!req.files) {
-        return res.status(400).send('No file uploaded.');
-    }
-    res.json({ state: 'success', data: parseFile(req.files)});
-  }, uploadErrorHandler);
 
 // 업로드된 파일들을 저장할 폴더 설정
 const fs = require('fs');
@@ -55,6 +38,9 @@ const storage = multer.diskStorage({
    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname)); // 저장되는 파일명 설정
   }
 });
+
+
+/*업로드 관련 처리 */
 
 // multer 설정
 // 파일 필터 및 크기 제한
@@ -99,6 +85,27 @@ function parseFile(files){
 
 
 
+// 파일 한개 업로드 처리
+app.post('/api/upload', upload.single('uploadfiles'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).send('No file uploaded.');
+    }
+
+    res.json({ state: 'success', data: parseFile(req.file)});
+  }, uploadErrorHandler);
+
+// 다중 파일 업로드 처리
+app.post('/api/uploads', upload.array('uploadfiles',12), (req, res) => { 
+    if (!req.files) {
+        return res.status(400).send('No file uploaded.');
+    }
+    res.json({ state: 'success', data: parseFile(req.files)});
+  }, uploadErrorHandler);
+
+
+
+
+
 // 파일 업로드 에러 핸들러
 function uploadErrorHandler(err, req, res, next) {
 let msg = err;  
@@ -107,8 +114,10 @@ if (err instanceof multer.MulterError) {
   console.log(err.code);
   if (err.code === 'LIMIT_FILE_SIZE') {
     msg = ` 최대 파일 크기 ${fileSize}MB를 초과하였습니다.`;  
-  } else if (err.code === 'LIMIT_FILE_TYPE') {
+  }else if (err.code === 'LIMIT_FILE_TYPE') {
     msg = `명시된 파일 확장자만 첨부 가능합니다.`;  
+  }else if(err.code === 'LIMIT_UNEXPECTED_FILE'){
+    msg = `한번에 12개까지 첨부가 가능합니다.`;  
   }else{
     err.code = "unknown"
   }
