@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <script>
+        const icon = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />'
+        document.write(icon);
+    </script>
+
+    <link rel="stylesheet" href="/css/chatbot.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body class="chatbot-page">
+    <div id="page-container">
+    
+        <!-- 상단 헤더 -->
+        <div id="top-header">
+            <div class="container clearfix">
+                <div id="contact-info">
+                    <span id="contact-phone">02-2186-5861~0</span>
+                    <a href="mailto:haiteam@kopo.ac.kr"><span id="contact-email">haiteam@kopo.ac.kr</span></a>
+                </div>
+                <div id="secondary-menu"></div>
+            </div>
+        </div>
+
+        <!-- 메인 헤더 -->
+        <header id="main-header">
+            <div class="container clearfix menu-container">
+                <div class="logo-container">
+                    <a href="https://sparkkorea.net/">
+                        <img src="../smart_img/강서캠퍼스-엠블렘_2020.png"
+                            alt="한국폴리텍대학 서울강서 스마트금융과" id="logo">
+                    </a>
+                </div>
+                <nav id="main-menu-nav">
+                    <ul id="main-menu" class="nav">
+                        <li><a href="/smart_main">메인페이지</a></li>
+                        <li><a href="/smart_chatbot">챗봇상담</a></li>
+                        <li><a href="/smart_file">File Upload</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <div id="title">챗봇</div>
+        <div id="chat-full-container">
+            <div id="chat-container"></div>
+            <form id="chat-form">
+                <input type="text" id="chat-input" required>
+                <button type="submit" id="send-button">
+                    <span class="material-symbols-outlined">send</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer id="main-footer">
+        <div class="container">
+            <p>&copy; 한국폴리텍대학 서울강서 스마트금융과</p>
+        </div>
+    </footer>
+</div>
+    <script src="/js/chatbot.js"></script>
+</body>
+
+</html>

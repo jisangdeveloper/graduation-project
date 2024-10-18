@@ -1,0 +1,15 @@
+{
+  "name": "glozzome",
+  "version": "1.0.0",
+  "description": "This is a business promotional website of a company. It's a mulitpage website with minimum 5-7 section in every single page. The site is fully responsive and designed with HTML, CSS and Bootstrap.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
