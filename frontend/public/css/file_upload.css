@@ -1,10 +1,10 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* body {
+body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(to bottom, #3b82f6, #ffffff);
     height: 100vh;
@@ -14,16 +14,16 @@
     color: #6b7280;
 } */
 
-.upload-container {
+/* .upload-container {
     background: white;
     border-radius: 12px;
     padding: 40px;
-    width: 400px;
+    width: 35%;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
-}
+} */
 
-h1 {
+/* h1 {
     font-size: 24px;
     font-weight: bold;
     color: #374151;
@@ -34,7 +34,7 @@ p {
     font-size: 14px;
     margin-bottom: 30px;
     color: #9ca3af;
-}
+} */
 
 .icons {
     display: flex;
@@ -83,7 +83,7 @@ a {
     border: 1px solid #ccc;
     padding: 20px;
     border-radius: 10px;
-    width: 300px;
+    width: 35%;
     margin: 0 auto;
 }
 
@@ -120,8 +120,11 @@ a {
     z-index: 1000;
 }
 
+
 .popup-content {
-    position: relative;
+    position: absolute;
+    top: 50%;  /* 부모 요소 기준으로 세로 중앙 */
+    left: 50%; /* 부모 요소 기준으로 가로 중앙 */
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -150,5 +153,12 @@ a {
     color: red;
 }
 #file{
-    height: 90%;
+    min-height: calc(100vh - 100px); /* 100vh에서 footer의 높이만큼 뺀 값 */
 }
+
+@media(max-width:767px){
+    /* 상문 */
+    .upload-container{
+        width: 80%;
+    }
+  }

@@ -13,8 +13,7 @@ body{
   color: #000 !important; 
 }
 .navbar-nav  li a:hover {
-  /* color:#1abc9c !important; */
-  background-color: #1abc9c ;
+  color:#427deb !important;
 }
 .navbar .webT{
   font-size: 20px;
@@ -119,7 +118,6 @@ body{
 /*Footer*/
 #footer{
   background:#000;
-  height: 150px;
 }
 #footer .fab{
   font-size:25px;
@@ -204,7 +202,7 @@ body{
   }
 }
 @media(max-width:767px){
-  
+
   #get-started .gC{
      margin-top: 0 !important;
   }
@@ -228,7 +226,6 @@ body{
   #services-table .text-center.display-4 {
      font-size: 30px;
   }
-
 }
 
 @media(max-width: 575px){
@@ -262,7 +259,7 @@ body{
 }
 @media(max-width: 420px){
   .navbar .navbar-brand {
-     width: 100%;
+     width: 75%;
   }
   #myCarousel .display-4    {
      font-size: 45px !important;
@@ -559,7 +556,7 @@ width: 48%;
 max-width: 100%;
 height: auto;
 border-radius: 10px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+box-shadow: 0 4px 8px rgba(0, 0, `0, 0.2);
 }
 
 .section-software-education .divider {
@@ -764,6 +761,7 @@ font-size: 14px;
   margin-top: 10px; /* 간격을 추가하고 싶다면 사용 */
 }
 
+
 /* 반응형 스타일 - 중간 화면 (태블릿, 1024px 이하) */
 @media (max-width: 1024px) {
   #main-menu {
@@ -819,6 +817,7 @@ font-size: 14px;
     max-width: 48%;
   }
 }
+
 
 /* 반응형 스타일 - 작은 화면 (모바일, 768px 이하) */
 @media (max-width: 768px) {
@@ -902,30 +901,8 @@ font-size: 14px;
   .section-faq p {
     font-size: 14px;
   }
-  .custom{
-    width: 100% !important;
-  }
 }
 
-/* 상문 */
-.fr{
-  float:right;
-}
-.active a{
-  color:black !important;
-  font-weight: bold; /* 호버 시 글자 굵게 */
-}
-.navbar-toggler {
-  /* padding: .25rem .75rem;
-  font-size: 1.25rem;
-  line-height: 1; */
-  background-color: #555555 !important;
-  /* border: 1px solid transparent;
-  border-radius: .25rem; */
-}
-.navbar-toggler:hover {
-  background-color: #333333; /* 호버 시 약간 더 짙은 색상 */
-}
-#app{
-  margin-bottom: 30px;
-}
+
+
+

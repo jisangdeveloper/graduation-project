@@ -6,23 +6,23 @@ body {
   margin: 0;
   justify-content: flex-start;
 }
-.title {
-  text-align: center !important;
+#title {
+  text-align: center;
   font-size: 30px;
   font-weight: bold;
   padding: 20px 0;
   /* background-color: #4CAF50; */
   width: 100%;
-  /* margin-top: 100px; */
+  margin-top: 100px;
 }
 #chat-full-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* 채팅 내용과 입력창 사이 공간 배분 */
   height: calc(100vh - 180px); /* 상단 헤더와 푸터를 제외한 화면의 높이 설정 */
-  /* max-width: 600px; 최대 너비 제한 */
-  /* margin: 0 auto; */
-  /* padding: 0 20px; */
+  max-width: 600px; /* 최대 너비 제한 */
+  margin: 0 auto;
+  padding: 0 20px;
   box-sizing: border-box;
 }
 #chat-container {
@@ -32,7 +32,7 @@ body {
   overflow-y: auto;
   scrollbar-width: none; /* Firefox  스크롤바 숨기기*/
   flex: 1;
-  /* max-width: 600px; */
+  max-width: 600px;
   margin: 20px auto;
   padding: 10px;
   width: 100%;
@@ -51,7 +51,7 @@ body {
   margin: 5px 0;
   border-radius: 5px;
   width: fit-content;
-  max-width: 50%;
+  max-width: 80%;
   position: relative;
 }
 .user {
@@ -78,13 +78,13 @@ body {
 #chat-form {
   display: flex;
   justify-content: center;
-  /* max-width: 600px; */
+  max-width: 600px;
   width: 100%;
   margin: 0 auto;
-  /* position: absolute; */
+  position: fixed;
   bottom: 0;
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
+  left: 50%;
+  transform: translateX(-50%);
   background: white;
   padding: 10px 0;
   bottom: 100px;
@@ -155,8 +155,9 @@ body {
     transform: rotate(360deg);
   }
 }
+
 /* 상문 */
-#chatting_wrap{
+#chat{
   display: flex;
 }
 #file_wrap{
@@ -168,33 +169,6 @@ body {
 #chat_wrap{
   width: 75%; /* 전체 화면의 25% 차지 */
   padding: 20px;
-  /* background-color: #f5f5f5; */
+  background-color: #f5f5f5;
   border-right: 1px solid #ddd;
-}
-.message-box.user{
-  margin-right: 20%;
-}
-@media(min-width:991px){
-  /* 상문 */
-  /* #file_wrap{
-    display: none;
-  } */
-  /* #chat_wrap{
-    width: 100% !important;
-  } */
-  /* .message-box.user{
-    margin-right: 0 !important;
-  } */
-}
-@media(max-width:767px){
-  /* 상문 */
-  #file_wrap{
-    display: none;
-  }
-  #chat_wrap{
-    width: 100% !important;
-  }
-  .message-box.user{
-    margin-right: 0 !important;
-  }
 }

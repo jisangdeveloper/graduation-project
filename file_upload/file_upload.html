@@ -7,6 +7,40 @@
     <link rel='stylesheet' href="/css/file_upload.css" type='text/css' media='all' />
 </head>
 <body>
+    <nav
+    class="navbar navbar-dark navbar-expand-lg"
+    uk-sticky="top:100; animation: uk-animation-slide-top; bottom: #sticky-on-scroll-up"
+  >
+    <div class="container">
+      <a href="/smart_main" class="navbar-brand">
+        <img
+          src="../smart_img/강서캠퍼스-엠블렘_2020.png"
+          class="img-fluid p-0"
+          style="width: 35%"
+        />
+      </a>
+      <button
+        class="navbar-toggler navbar-toggler-right"
+        data-toggle="collapse"
+        data-target="#navBar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navBar">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/smart_main">메인페이지</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/smart_chatbot">챗봇상담</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/smart_file">File Upload</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
     <div class="upload-container">
         <h1>File Upload</h1>
         <p>확장자 jpg,jpeg,png,pdf,ppt,docx<br>최대 20MB까지 업로드가 가능합니다.</p>

@@ -12,546 +12,620 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="css/chatbot.css"> <!-- chat화면 css-->
+    <link rel='stylesheet' href="css/file_upload.css" type='text/css'/><!-- fileupload화면 css-->
     <title>
       한국폴리텍대학 서울강서 스마트금융과 | 대졸자 핀테크 분야 IT업체 취업
       교육과정
     </title>
   </head>
   <body>
-    <!-- 상단 헤더 -->
-    <!-- <header id="top-header">
-      <div class="container clearfix">
-        <div id="contact-info">
-          <span id="contact-phone">02-2186-5861~0</span>
-          <a href="mailto:haiteam@kopo.ac.kr"
-            ><span id="contact-email">haiteam@kopo.ac.kr</span></a
-          >
-        </div>
-        <div id="secondary-menu"></div>
-      </div>
-    </header>  -->
-
-    <!-- Navbar Section Start -->
     <nav
       class="navbar navbar-dark navbar-expand-lg"
       uk-sticky="top:100; animation: uk-animation-slide-top; bottom: #sticky-on-scroll-up"
     >
       <div class="container">
-        <a href="/smart_main" class="navbar-brand">
+        <a href="#" class="navbar-brand">
           <img
             src="../smart_img/강서캠퍼스-엠블렘_2020.png"
             class="img-fluid p-0"
             style="width: 35%"
           />
-        </a>
-        <button
-          class="navbar-toggler navbar-toggler-right"
+
+          <button
+          class="navbar-toggler navbar-toggler-right fr"
           data-toggle="collapse"
           data-target="#navBar"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+        </a>
+      
         <div class="collapse navbar-collapse" id="navBar">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/smart_main">메인페이지</a>
+            <li class="nav-item menu-item active" data-content="home">
+              <a class="nav-link" href="#">메인페이지</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/smart_chatbot">챗봇상담</a>
+            <li class="nav-item menu-item" data-content="chat">
+              <a class="nav-link" href="#">챗봇상담</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/smart_file">File Upload</a>
+            <li class="nav-item menu-item" data-content="file">
+              <a class="nav-link" href="#">File Upload</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
     <!-- Nav Section End -->
-
-    <section>
-      <div id="main-content">
-        <article id="post" class="post page type-page status-publish">
-          <div class="entry-content">
-            <div id="content-wrapper">
-              <div class="section section-image">
-                <div class="image-wrap">
-                  <img src="../smart_img/메인2.png"" alt="메인 이미지" />
-                </div>
-              </div>
-
-              <div
-                class="section section-buttons"
-                style="display: flex; justify-content: space-between"
-              >
-                <div class="button-wrapper" style="flex: 1; margin-right: 10px">
-                  <a class="button" href="https://vo.la/tBQ9Dl"
-                    >원서접수 바로가기</a
-                  >
-                </div>
-                <div class="button-wrapper" style="flex: 1; margin-left: 10px">
-                  <a class="button" href="https://ipsi.kopo.ac.kr"
-                    >모집요강 바로가기</a
-                  >
-                </div>
-              </div>
-
-              <div class="section section-curriculum">
-                <div class="row">
-                  <div class="column column-1-3">
-                    <div class="text-module">
-                      <h2>주요 교육과정</h2>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="text-module">
-                      <h4>
-                        금융데이터 분석 및 블록체인 모듈을 프로그램을 통해서
-                        구현하고 소프트웨어 개발자로 성장하기 위한 필수
-                        프로그램인 자바를 활용한 웹개발을 학습합니다. 또한 최근
-                        모바일 사용자의 증가로 인한 모바일 앱 개발 방법도
-                        학습합니다.
-                      </h4>
-                    </div>
-                  </div>
-
-                  <div class="column column-2-3">
-                    <div class="row-inner">
-                      <div class="column-inner column-1-2">
-                        <div class="blurb">
-                          <a href="#"
-                            ><img
-                              loading="lazy"
-                              width="128"
-                              height="128"
-                              src="smart_img/coding-icon_1.jpg"
-                              alt=""
-                              class="image-animated"
-                          /></a>
-                          <div class="blurb-content">
-                            <h4><a href="#">빅데이터 & 인공지능</a></h4>
-                            <p>
-                              삼성에서 경험했던 프로젝트 베이스로 현장 기술을
-                              배울 수 있습니다. 기초부터 통계적 분석, 머신러닝,
-                              딥러닝 학습
-                            </p>
-                          </div>
-                        </div>
-                        <div class="blurb">
-                          <a href="#"
-                            ><img
-                              loading="lazy"
-                              width="128"
-                              height="128"
-                              src="smart_img/coding-icon_1.jpg"
-                              alt=""
-                              class="image-animated"
-                          /></a>
-                          <div class="blurb-content">
-                            <h4><a href="#">웹 개발</a></h4>
-                            <p>
-                              자바 및 HTML&Javascript 활용 웹개발 기술을
-                              학습합니다.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="column-inner column-1-2">
-                        <div class="blurb">
-                          <a href="#"
-                            ><img
-                              loading="lazy"
-                              width="128"
-                              height="128"
-                              src="smart_img/coding-icon_7.jpg"
-                              alt=""
-                              class="image-animated"
-                          /></a>
-                          <div class="blurb-content">
-                            <h4><a href="#">블록체인</a></h4>
-                            <p>
-                              블록체인의 결제모듈을 파이썬을 활용하여
-                              실습합니다.
-                            </p>
-                          </div>
-                        </div>
-                        <div class="blurb">
-                          <a href="#"
-                            ><img
-                              loading="lazy"
-                              width="128"
-                              height="128"
-                              src="smart_img/coding-icon_2.jpg"
-                              alt=""
-                              class="image-animated"
-                          /></a>
-                          <div class="blurb-content">
-                            <h4><a href="#">모바일 앱 개발</a></h4>
-                            <p>
-                              IOS를 swift 활용 앱을 만드는 방법을 배우고
-                              자신만의 앱을 개발하는 실습을 진행합니다.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+    <div id="app">
+      <section class="content" id="home">
+        <div id="main-content">
+          <article id="post" class="post page type-page status-publish">
+            <div class="entry-content">
+              <div id="content-wrapper">
+                <div class="section section-image">
+                  <div class="image-wrap">
+                    <img src="../smart_img/메인2.png"" alt="메인 이미지" />
                   </div>
                 </div>
-              </div>
 
-              <div class="section section-software-education">
-                <div class="row">
-                  <div class="column column-1-2">
-                    <div class="image-module">
-                      <span class="image-wrap">
-                        <div class="box-shadow"></div>
-                        <img
-                          src="smart_img/하이브리드앱개발.png"
-                          alt="하이브리드앱개발"
-                          title="하이브리드앱개발"
-                        />
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="column column-1-2">
-                    <div class="text-module">
-                      <h2>소프트웨어 중심 교육과정</h2>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="text-module">
-                      <p>
-                        소프트웨어를 활용하여 금융권의 빅데이터 수집 환경을
-                        구축하거나, 수집된 데이터를 활용하여 새로운 인사이트를
-                        창출하는 방법과 웹 또는 모바일 화면과 연계하여 개발한
-                        모듈을 어디서든
-                        <span style="font-size: large">접근가능한</span>
-                        소프트웨어 기반 교육과정입니다.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="skyblue-divider"></div>
-              <div class="fullwidth-image-container">
-                <img
-                  loading="lazy"
-                  src="smart_img/한국폴리텍대학-2024.png"
-                  alt=""
-                  title="한국폴리텍대학 - 2024"
-                  height="auto"
-                  width="auto"
-                />
-              </div>
-
-              <div class="skyblue-divider"></div>
-              <div class="section section-portfolio">
-                <div class="row">
-                  <div class="column column-1-3">
-                    <div class="text-module">
-                      <h2>자신만의 포트폴리오</h2>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="text-module">
-                      <h4>
-                        학습한 내용을 바탕으로 팀단위 및 개별 프로젝트를 진행한
-                        후 각자의 개발 프로젝트를 패널로 만들어 발표 및
-                        개발내용을 웹에 게시합니다.
-                      </h4>
-                    </div>
-                  </div>
-
-                  <div class="column column-2-3">
-                    <div class="row-inner">
-                      <div class="column-inner column-1-2">
-                        <div class="image-container">
-                          <a href="#img1">
-                            <img
-                              loading="lazy"
-                              width="128"
-                              height="128"
-                              src="smart_img/첨부1_환율-예측_최종산출본.jpg"
-                              alt="첨부1_환율 예측_최종산출본"
-                              title="첨부1_환율 예측_최종산출본"
-                              class="image-animated"
-                            />
-                          </a>
-                        </div>
-                        <div class="image-container">
-                          <a href="#img2">
-                            <img
-                              loading="lazy"
-                              width="128"
-                              height="128"
-                              src="smart_img/판넬_개요_LSTM_박종선.jpg"
-                              alt="판넬_개요_LSTM_박종선"
-                              title="판넬_개요_LSTM_박종선"
-                              class="image-animated"
-                            />
-                          </a>
-                        </div>
-                      </div>
-                      <div class="column-inner column-1-2">
-                        <div class="image-container">
-                          <a href="#img3">
-                            <img
-                              loading="lazy"
-                              width="128"
-                              height="128"
-                              src="smart_img/공통과제_인식모델.jpg"
-                              alt="공통과제_인식모델"
-                              title="공통과제_인식모델"
-                              class="image-animated"
-                            />
-                          </a>
-                        </div>
-                        <div class="image-container">
-                          <a href="#img4">
-                            <img
-                              loading="lazy"
-                              width="128"
-                              height="128"
-                              src="smart_img/수요예측-프로젝트.jpg"
-                              alt="수요예측 실습"
-                              title="수요예측 실습"
-                              class="image-animated"
-                            />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Lightbox 확대 이미지 -->
-                  <a href="#_" class="lightbox" id="img1">
-                    <img
-                      src="smart_img/첨부1_환율-예측_최종산출본.jpg"
-                      alt="첨부1_환율 예측_최종산출본"
-                    />
-                  </a>
-                  <a href="#_" class="lightbox" id="img2">
-                    <img
-                      src="smart_img/판넬_개요_LSTM_박종선.jpg"
-                      alt="판넬_개요_LSTM_박종선"
-                    />
-                  </a>
-                  <a href="#_" class="lightbox" id="img3">
-                    <img
-                      src="smart_img/공통과제_인식모델.jpg"
-                      alt="공통과제_인식모델"
-                    />
-                  </a>
-                  <a href="#_" class="lightbox" id="img4">
-                    <img
-                      src="smart_img/수요예측-프로젝트.jpg"
-                      alt="수요예측 실습"
-                    />
-                  </a>
-                </div>
-              </div>
-
-              <div class="section section-faq">
-                <div class="row">
-                  <div class="column column-1-3">
-                    <div class="text-container">
-                      <h2>FAQ</h2>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="text-container">
-                      <h4>자주하는 질문은 우측 내용을 참조하세요</h4>
-                    </div>
-                  </div>
-
-                  <div class="column column-2-3">
-                    <div class="row-inner">
-                      <div class="faq-item">
-                        <div class="faq-question">
-                          <span class="faq-icon">?</span>
-                          <h4>비전공자는 어렵지 않을까요?</h4>
-                        </div>
-                        <p>
-                          어렵지 않습니다. 실제 현장에서 사용하는 기술 위주로
-                          기본부터 체계적으로 학습합니다. 개별 면담과 맞춤형
-                          지도를 통해 최대한 이해가 가능하도록 지도하고
-                          있습니다.
-                        </p>
-                      </div>
-
-                      <div class="faq-item">
-                        <div class="faq-question">
-                          <span class="faq-icon">?</span>
-                          <h4>교수진은 어떻게 되나요?</h4>
-                        </div>
-                        <p>
-                          삼성, LG 등 실무경험이 풍부한 전문 교수진이 실제
-                          프로젝트에서 활용한 기술 기반으로 교육을 진행합니다.
-                          현재 현장에서 개발을 직접 진행하고 있는 전문
-                          개발자들도 함께 강의합니다.
-                        </p>
-                      </div>
-
-                      <div class="faq-item">
-                        <div class="faq-question">
-                          <span class="faq-icon">?</span>
-                          <h4>면접 1차 불합격 시 2차는?</h4>
-                        </div>
-                        <p>
-                          2차에도 지원 가능합니다. 모집인원 제한이 있기 때문에
-                          많은 인원을 뽑지 못하지만, 1차에서 떨어지더라도 2차에
-                          지원 가능합니다.
-                        </p>
-                      </div>
-
-                      <div class="faq-item">
-                        <div class="faq-question">
-                          <span class="faq-icon">?</span>
-                          <h4>연계 업체가 따로 있나요?</h4>
-                        </div>
-                        <p>
-                          실제 학습한 내용을 현장에서 바로 활용할 수 있는 양질의
-                          업체들과 지속적으로 교류하고 있습니다. 특히 대형
-                          프로젝트들이 학과와 연계되어 이루어지고 있습니다.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="skyblue-divider"></div>
-              <!-- Slider Section Start -->
-              <section id="slider" class="bg-white">
                 <div
-                  id="myCarousel"
-                  class="carousel slide"
-                  data-ride="carousel"
+                  class="section section-buttons"
+                  style="display: flex; justify-content: space-between"
                 >
-                  <ol class="carousel-indicators">
-                    <li
-                      class="active"
-                      data-slide-to="0"
-                      data-target="#myCarousel"
-                    ></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                    <li data-target="#myCarousel" data-slide-to="3"></li>
-                  </ol>
-                  <div class="carousel-inner" role="listbox">
-                    <!-- First Slide -->
-                    <div class="carousel-item active">
-                      <div class="container">
-                        <div class="carousel-caption pb-5 mb-5 text-left">
-                          <h2 class="display-4 text-light">Heading One</h2>
-                          <p class="lead">
-                            Lorem ipsum ut do dolor excepteur adipisicing et
-                            minim consectetur
-                            <br />elit laborum quis nostrud eiusmod.
-                          </p>
-                          <!-- Embedded YouTube Video -->
-                          <iframe
-                            width="100%"
-                            height="400"
-                            src="https://www.youtube.com/embed/w2TzC7h2GEc"
-                            title="YouTube video"
-                            frameborder="0"
-                            allowfullscreen
-                          ></iframe>
-                          <!-- <a href="#" class="btn btn-success mt-3">See More</a> -->
-                        </div>
+                  <div class="button-wrapper" style="flex: 1; margin-right: 10px">
+                    <a class="button" href="https://vo.la/tBQ9Dl"
+                      >원서접수 바로가기</a
+                    >
+                  </div>
+                  <div class="button-wrapper" style="flex: 1; margin-left: 10px">
+                    <a class="button" href="https://ipsi.kopo.ac.kr"
+                      >모집요강 바로가기</a
+                    >
+                  </div>
+                </div>
+
+                <div class="section section-curriculum">
+                  <div class="row">
+                    <div class="column column-1-3">
+                      <div class="text-module">
+                        <h2>주요 교육과정</h2>
+                      </div>
+                      <div class="divider"></div>
+                      <div class="text-module">
+                        <h4>
+                          금융데이터 분석 및 블록체인 모듈을 프로그램을 통해서
+                          구현하고 소프트웨어 개발자로 성장하기 위한 필수
+                          프로그램인 자바를 활용한 웹개발을 학습합니다. 또한 최근
+                          모바일 사용자의 증가로 인한 모바일 앱 개발 방법도
+                          학습합니다.
+                        </h4>
                       </div>
                     </div>
-                    <!-- Second Slide -->
-                    <div class="carousel-item">
-                      <div class="container">
-                        <div class="carousel-caption mb-5 text-center">
-                          <h2 class="display-4 text-light">Heading Two</h2>
-                          <p>
-                            Lorem ipsum ut do dolor excepteur adipisicing et
-                            minim consectetur elit laborum quis nostrud eiusmod.
-                          </p>
-                          <!-- Embedded YouTube Video -->
-                          <iframe
-                            width="100%"
-                            height="400"
-                            src="https://www.youtube.com/embed/nPXE29Afmuw"
-                            title="YouTube video"
-                            frameborder="0"
-                            allowfullscreen
-                          ></iframe>
-                          <!-- <a href="#" class="btn btn-warning mt-3">Read More</a> -->
+
+                    <div class="column column-2-3">
+                      <div class="row-inner">
+                        <div class="column-inner column-1-2">
+                          <div class="blurb">
+                            <a href="#"
+                              ><img
+                                loading="lazy"
+                                width="128"
+                                height="128"
+                                src="smart_img/coding-icon_1.jpg"
+                                alt=""
+                                class="image-animated"
+                            /></a>
+                            <div class="blurb-content">
+                              <h4><a href="#">빅데이터 & 인공지능</a></h4>
+                              <p>
+                                삼성에서 경험했던 프로젝트 베이스로 현장 기술을
+                                배울 수 있습니다. 기초부터 통계적 분석, 머신러닝,
+                                딥러닝 학습
+                              </p>
+                            </div>
+                          </div>
+                          <div class="blurb">
+                            <a href="#"
+                              ><img
+                                loading="lazy"
+                                width="128"
+                                height="128"
+                                src="smart_img/coding-icon_1.jpg"
+                                alt=""
+                                class="image-animated"
+                            /></a>
+                            <div class="blurb-content">
+                              <h4><a href="#">웹 개발</a></h4>
+                              <p>
+                                자바 및 HTML&Javascript 활용 웹개발 기술을
+                                학습합니다.
+                              </p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                    <!-- Third Slide -->
-                    <div class="carousel-item">
-                      <div class="container">
-                        <div class="carousel-caption pb-5 mb-5 text-right">
-                          <h2 class="display-4 text-light">Heading Three</h2>
-                          <p>
-                            Lorem ipsum ut do dolor excepteur adipisicing et
-                            minim <br />consectetur elit laborum quis nostrud
-                            eiusmod.
-                          </p>
-                          <!-- Embedded YouTube Video -->
-                          <iframe
-                            width="100%"
-                            height="400"
-                            src="https://www.youtube.com/embed/f1U78nFlTiU"
-                            title="YouTube video"
-                            frameborder="0"
-                            allowfullscreen
-                          ></iframe>
-                          <!-- <a href="#" class="btn btn-info mt-3">Learn More</a> -->
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Fourth Slide -->
-                    <div class="carousel-item">
-                      <div class="container">
-                        <div class="carousel-caption pb-5 mb-5 text-left">
-                          <h2 class="display-4 text-light">Heading Four</h2>
-                          <p>
-                            Lorem ipsum ut do dolor excepteur adipisicing et
-                            minim consectetur elit <br />laborum quis nostrud
-                            eiusmod.
-                          </p>
-                          <!-- Embedded YouTube Video -->
-                          <iframe
-                            width="100%"
-                            height="400"
-                            src="https://www.youtube.com/embed/S0rrpqFQXiQ"
-                            title="YouTube video"
-                            frameborder="0"
-                            allowfullscreen
-                          ></iframe>
-                          <!-- <a href="#" class="btn btn-success mt-3">Read More</a> -->
+                        <div class="column-inner column-1-2">
+                          <div class="blurb">
+                            <a href="#"
+                              ><img
+                                loading="lazy"
+                                width="128"
+                                height="128"
+                                src="smart_img/coding-icon_7.jpg"
+                                alt=""
+                                class="image-animated"
+                            /></a>
+                            <div class="blurb-content">
+                              <h4><a href="#">블록체인</a></h4>
+                              <p>
+                                블록체인의 결제모듈을 파이썬을 활용하여
+                                실습합니다.
+                              </p>
+                            </div>
+                          </div>
+                          <div class="blurb">
+                            <a href="#"
+                              ><img
+                                loading="lazy"
+                                width="128"
+                                height="128"
+                                src="smart_img/coding-icon_2.jpg"
+                                alt=""
+                                class="image-animated"
+                            /></a>
+                            <div class="blurb-content">
+                              <h4><a href="#">모바일 앱 개발</a></h4>
+                              <p>
+                                IOS를 swift 활용 앱을 만드는 방법을 배우고
+                                자신만의 앱을 개발하는 실습을 진행합니다.
+                              </p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- Left arrow -->
-                  <a
-                    href="#myCarousel"
-                    class="carousel-control-prev"
-                    data-slide="prev"
-                  >
-                    <span class="material-icons">arrow_back</span>
-                  </a>
-                  <!-- Right arrow -->
-                  <a
-                    href="#myCarousel"
-                    class="carousel-control-next"
-                    data-slide="next"
-                  >
-                    <span class="material-icons">arrow_forward</span>
-                  </a>
                 </div>
-              </section>
-              <!-- Slider Section End -->
+
+                <div class="section section-software-education">
+                  <div class="row">
+                    <div class="column column-1-2 custom">
+                      <div class="image-module">
+                        <span class="image-wrap">
+                          <div class="box-shadow"></div>
+                          <img
+                            src="smart_img/하이브리드앱개발.png"
+                            alt="하이브리드앱개발"
+                            title="하이브리드앱개발"
+                          />
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="column column-1-2 custom">
+                      <div class="text-module">
+                        <h2>소프트웨어 중심 교육과정</h2>
+                      </div>
+                      <div class="divider"></div>
+                      <div class="text-module">
+                        <p>
+                          소프트웨어를 활용하여 금융권의 빅데이터 수집 환경을
+                          구축하거나, 수집된 데이터를 활용하여 새로운 인사이트를
+                          창출하는 방법과 웹 또는 모바일 화면과 연계하여 개발한
+                          모듈을 어디서든
+                          <span style="font-size: large">접근가능한</span>
+                          소프트웨어 기반 교육과정입니다.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="skyblue-divider"></div>
+                <div class="fullwidth-image-container">
+                  <img
+                    loading="lazy"
+                    src="smart_img/한국폴리텍대학-2024.png"
+                    alt=""
+                    title="한국폴리텍대학 - 2024"
+                    height="auto"
+                    width="auto"
+                  />
+                </div>
+
+                <div class="skyblue-divider"></div>
+                <div class="section section-portfolio">
+                  <div class="row">
+                    <div class="column column-1-3">
+                      <div class="text-module">
+                        <h2>자신만의 포트폴리오</h2>
+                      </div>
+                      <div class="divider"></div>
+                      <div class="text-module">
+                        <h4>
+                          학습한 내용을 바탕으로 팀단위 및 개별 프로젝트를 진행한
+                          후 각자의 개발 프로젝트를 패널로 만들어 발표 및
+                          개발내용을 웹에 게시합니다.
+                        </h4>
+                      </div>
+                    </div>
+
+                    <div class="column column-2-3">
+                      <div class="row-inner">
+                        <div class="column-inner column-1-2">
+                          <div class="image-container fr">
+                            <a href="#img1">
+                              <img
+                                loading="lazy"
+                                width="128"
+                                height="128"
+                                src="smart_img/첨부1_환율-예측_최종산출본.jpg"
+                                alt="첨부1_환율 예측_최종산출본"
+                                title="첨부1_환율 예측_최종산출본"
+                                class="image-animated"
+                              />
+                            </a>
+                          </div>
+                          <div class="image-container">
+                            <a href="#img2">
+                              <img
+                                loading="lazy"
+                                width="128"
+                                height="128"
+                                src="smart_img/판넬_개요_LSTM_박종선.jpg"
+                                alt="판넬_개요_LSTM_박종선"
+                                title="판넬_개요_LSTM_박종선"
+                                class="image-animated"
+                              />
+                            </a>
+                          </div>
+                        </div>
+                        <div class="column-inner column-1-2">
+                          <div class="image-container fr">
+                            <a href="#img3">
+                              <img
+                                loading="lazy"
+                                width="128"
+                                height="128"
+                                src="smart_img/공통과제_인식모델.jpg"
+                                alt="공통과제_인식모델"
+                                title="공통과제_인식모델"
+                                class="image-animated"
+                              />
+                            </a>
+                          </div>
+                          <div class="image-container">
+                            <a href="#img4">
+                              <img
+                                loading="lazy"
+                                width="128"
+                                height="128"
+                                src="smart_img/수요예측-프로젝트.jpg"
+                                alt="수요예측 실습"
+                                title="수요예측 실습"
+                                class="image-animated"
+                              />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Lightbox 확대 이미지 -->
+                    <a href="#_" class="lightbox" id="img1">
+                      <img
+                        src="smart_img/첨부1_환율-예측_최종산출본.jpg"
+                        alt="첨부1_환율 예측_최종산출본"
+                      />
+                    </a>
+                    <a href="#_" class="lightbox" id="img2">
+                      <img
+                        src="smart_img/판넬_개요_LSTM_박종선.jpg"
+                        alt="판넬_개요_LSTM_박종선"
+                      />
+                    </a>
+                    <a href="#_" class="lightbox" id="img3">
+                      <img
+                        src="smart_img/공통과제_인식모델.jpg"
+                        alt="공통과제_인식모델"
+                      />
+                    </a>
+                    <a href="#_" class="lightbox" id="img4">
+                      <img
+                        src="smart_img/수요예측-프로젝트.jpg"
+                        alt="수요예측 실습"
+                      />
+                    </a>
+                  </div>
+                </div>
+
+                <div class="section section-faq">
+                  <div class="row">
+                    <div class="column column-1-3">
+                      <div class="text-container">
+                        <h2>FAQ</h2>
+                      </div>
+                      <div class="divider"></div>
+                      <div class="text-container">
+                        <h4>자주하는 질문은 우측 내용을 참조하세요</h4>
+                      </div>
+                    </div>
+
+                    <div class="column column-2-3">
+                      <div class="row-inner">
+                        <div class="faq-item">
+                          <div class="faq-question">
+                            <span class="faq-icon">?</span>
+                            <h4>비전공자는 어렵지 않을까요?</h4>
+                          </div>
+                          <p>
+                            어렵지 않습니다. 실제 현장에서 사용하는 기술 위주로
+                            기본부터 체계적으로 학습합니다. 개별 면담과 맞춤형
+                            지도를 통해 최대한 이해가 가능하도록 지도하고
+                            있습니다.
+                          </p>
+                        </div>
+
+                        <div class="faq-item">
+                          <div class="faq-question">
+                            <span class="faq-icon">?</span>
+                            <h4>교수진은 어떻게 되나요?</h4>
+                          </div>
+                          <p>
+                            삼성, LG 등 실무경험이 풍부한 전문 교수진이 실제
+                            프로젝트에서 활용한 기술 기반으로 교육을 진행합니다.
+                            현재 현장에서 개발을 직접 진행하고 있는 전문
+                            개발자들도 함께 강의합니다.
+                          </p>
+                        </div>
+
+                        <div class="faq-item">
+                          <div class="faq-question">
+                            <span class="faq-icon">?</span>
+                            <h4>면접 1차 불합격 시 2차는?</h4>
+                          </div>
+                          <p>
+                            2차에도 지원 가능합니다. 모집인원 제한이 있기 때문에
+                            많은 인원을 뽑지 못하지만, 1차에서 떨어지더라도 2차에
+                            지원 가능합니다.
+                          </p>
+                        </div>
+
+                        <div class="faq-item">
+                          <div class="faq-question">
+                            <span class="faq-icon">?</span>
+                            <h4>연계 업체가 따로 있나요?</h4>
+                          </div>
+                          <p>
+                            실제 학습한 내용을 현장에서 바로 활용할 수 있는 양질의
+                            업체들과 지속적으로 교류하고 있습니다. 특히 대형
+                            프로젝트들이 학과와 연계되어 이루어지고 있습니다.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="skyblue-divider"></div>
+                <!-- Slider Section Start -->
+                <section id="slider" class="bg-white">
+                  <div
+                    id="myCarousel"
+                    class="carousel slide"
+                    data-ride="carousel"
+                  >
+                    <ol class="carousel-indicators">
+                      <li
+                        class="active"
+                        data-slide-to="0"
+                        data-target="#myCarousel"
+                      ></li>
+                      <li data-target="#myCarousel" data-slide-to="1"></li>
+                      <li data-target="#myCarousel" data-slide-to="2"></li>
+                      <li data-target="#myCarousel" data-slide-to="3"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                      <!-- First Slide -->
+                      <div class="carousel-item active">
+                        <div class="container">
+                          <div class="carousel-caption pb-5 mb-5 text-left">
+                            <h2 class="display-4 text-light">Heading One</h2>
+                            <p class="lead">
+                              Lorem ipsum ut do dolor excepteur adipisicing et
+                              minim consectetur
+                              <br />elit laborum quis nostrud eiusmod.
+                            </p>
+                            <!-- Embedded YouTube Video -->
+                            <iframe
+                              width="100%"
+                              height="400"
+                              src="https://www.youtube.com/embed/w2TzC7h2GEc"
+                              title="YouTube video"
+                              frameborder="0"
+                              allowfullscreen
+                            ></iframe>
+                            <!-- <a href="#" class="btn btn-success mt-3">See More</a> -->
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Second Slide -->
+                      <div class="carousel-item">
+                        <div class="container">
+                          <div class="carousel-caption mb-5 text-center">
+                            <h2 class="display-4 text-light">Heading Two</h2>
+                            <p>
+                              Lorem ipsum ut do dolor excepteur adipisicing et
+                              minim consectetur elit laborum quis nostrud eiusmod.
+                            </p>
+                            <!-- Embedded YouTube Video -->
+                            <iframe
+                              width="100%"
+                              height="400"
+                              src="https://www.youtube.com/embed/nPXE29Afmuw"
+                              title="YouTube video"
+                              frameborder="0"
+                              allowfullscreen
+                            ></iframe>
+                            <!-- <a href="#" class="btn btn-warning mt-3">Read More</a> -->
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Third Slide -->
+                      <div class="carousel-item">
+                        <div class="container">
+                          <div class="carousel-caption pb-5 mb-5 text-right">
+                            <h2 class="display-4 text-light">Heading Three</h2>
+                            <p>
+                              Lorem ipsum ut do dolor excepteur adipisicing et
+                              minim <br />consectetur elit laborum quis nostrud
+                              eiusmod.
+                            </p>
+                            <!-- Embedded YouTube Video -->
+                            <iframe
+                              width="100%"
+                              height="400"
+                              src="https://www.youtube.com/embed/f1U78nFlTiU"
+                              title="YouTube video"
+                              frameborder="0"
+                              allowfullscreen
+                            ></iframe>
+                            <!-- <a href="#" class="btn btn-info mt-3">Learn More</a> -->
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Fourth Slide -->
+                      <div class="carousel-item">
+                        <div class="container">
+                          <div class="carousel-caption pb-5 mb-5 text-left">
+                            <h2 class="display-4 text-light">Heading Four</h2>
+                            <p>
+                              Lorem ipsum ut do dolor excepteur adipisicing et
+                              minim consectetur elit <br />laborum quis nostrud
+                              eiusmod.
+                            </p>
+                            <!-- Embedded YouTube Video -->
+                            <iframe
+                              width="100%"
+                              height="400"
+                              src="https://www.youtube.com/embed/S0rrpqFQXiQ"
+                              title="YouTube video"
+                              frameborder="0"
+                              allowfullscreen
+                            ></iframe>
+                            <!-- <a href="#" class="btn btn-success mt-3">Read More</a> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Left arrow -->
+                    <a
+                      href="#myCarousel"
+                      class="carousel-control-prev"
+                      data-slide="prev"
+                    >
+                      <span class="material-icons">arrow_back</span>
+                    </a>
+                    <!-- Right arrow -->
+                    <a
+                      href="#myCarousel"
+                      class="carousel-control-next"
+                      data-slide="next"
+                    >
+                      <span class="material-icons">arrow_forward</span>
+                    </a>
+                  </div>
+                </section>
+                <!-- Slider Section End -->
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="content" id="chat" style="display: none;">
+        <div id="chatting_wrap">
+          <div id="file_wrap">
+            <div>
+              <span class="title">파일 업로드</span>
+            </div>
+            <div class="upload-container" style="margin-top: 30px;width: 100%;">
+              <h1>File Upload</h1>
+              <p>확장자 jpg,jpeg,png,pdf,ppt,docx<br>최대 20MB까지 업로드가 가능합니다.</p>
+              
+              <div class="icons">
+                  <img src="/img/file.png" alt="File Icon 1">
+                  <img src="/img/jpeg.png" alt="File Icon 2">
+                  <img src="/img/raw.png" alt="File Icon 3">
+              </div>
+              
+              <div id="drop-area" class="upload-box">
+                  Drag a file here or <input type="file" id="chat_input_file" multiple hidden /> 
+                  <label for="input_file" style="cursor: pointer; color: #3b82f6;">browse</label> for a file to upload.
+              </div>
+              
+              <!-- 업로드 후 파일 링크 표시 -->
+              <div id="chat-link-box">
+              </div>
+            </div>
+            <div style="margin-top: 30px;">
+              <span class="title">파일 리스트</span>
             </div>
           </div>
-        </article>
-      </div>
-    </section>
+          <div id="chat_wrap">
+            <div class="title">
+              챗봇
+            </div>
+            <div id="chat-full-container">
+                <div id="chat-container">
+                </div>
+                <div id="chat-form-contrainer">
+                  <form id="chat-form">
+                      <input type="text" id="chat-input" required>
+                      <button type="submit" id="send-button">
+                          <span class="material-symbols-outlined">send</span>
+                      </button>
+                  </form>
+                </div>
+            </div>
+          </div>
+        </div>
+      </section> 
+      <section class="content" id="file" style="display: none;margin-bottom: 30px;">
+        <div class="title">
+          <!-- <span >파일 업로드</span> -->
+        </div>
+        <div class="upload-container" style="margin-top: 100px;">
+          <h1>File Upload</h1>
+          <p>확장자 jpg,jpeg,png,pdf,ppt,docx<br>최대 20MB까지 업로드가 가능합니다.</p>
+          
+          <div class="icons">
+              <img src="/img/file.png" alt="File Icon 1">
+              <img src="/img/jpeg.png" alt="File Icon 2">
+              <img src="/img/raw.png" alt="File Icon 3">
+          </div>
+          
+          <div id="drop-area" class="upload-box">
+              Drag a file here or <input type="file" id="input_file" multiple hidden /> 
+              <label for="input_file" style="cursor: pointer; color: #3b82f6;">browse</label> for a file to upload.
+          </div>
+          
+          <!-- 업로드 후 파일 링크 표시 -->
+          <div id="link-box">
+              
+          </div>
+        </div>
+        <!-- 팝업(업로드 중) -->
+        <div id="uploadPopup" class="popup hidden">
+          <div class="popup-content">
+              <span id="closePopup" class="close-btn">&times;</span>
+              <p>업로드 중입니다</p>
+          </div>
+        </div>
+      </section> 
+    </div>
+
+ 
+
 
     <!-- Footer Section Start -->
     <footer id="footer" class="py-3 text-center text-light">
@@ -573,5 +647,34 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/uikit.min.js"></script>
     <script type="text/javascript" src="js/uikit-icons.min.js"></script>
+    <script>
+    // 모든 메뉴 항목에 클릭 이벤트 추가
+      document.querySelectorAll('.menu-item').forEach(item => {
+        item.addEventListener('click', function() {
+          
+          // 모든 콘텐츠를 숨기기
+          document.querySelectorAll('.content').forEach(content => {
+            content.style.display = 'none';
+          });
+
+
+          // 모든 메뉴 항목에서 'active' 클래스 제거
+          document.querySelectorAll('.menu-item').forEach(menu => {
+            menu.classList.remove('active');
+          });
+
+          this.classList.add('active');
+
+          // 클릭된 메뉴에 해당하는 콘텐츠만 표시
+          const contentId = this.getAttribute('data-content');
+          console.log(contentId);
+          document.getElementById(contentId).style.display = 'block';
+        });
+      });
+    </script>
+      <!-- chat -->
+      <script type="text/javascript" src="js/chatbot.js"></script>
+      <!-- file upload -->
+      <script type='text/javascript' src='js/upload.js'></script>
   </body>
 </html>

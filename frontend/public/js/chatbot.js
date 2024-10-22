@@ -2,7 +2,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const chatForm = document.getElementById('chat-form');
     const chatInput = document.getElementById('chat-input');
     const chatContainer = document.getElementById('chat-container');
-    const url = "http://127.0.0.1:8000/answer";
+    const url = "http://192.168.110.52:8000/answer";
+
+
+    //기본 멘트
+    addMessageToChat('ai_assistant', '안녕하세요!! 강서폴리텍대학교 스마트금융과 챗봇입니다.'); //응답이 유효하지 않음
+
 
     chatForm.addEventListener('submit', async (event) => {
         event.preventDefault();
