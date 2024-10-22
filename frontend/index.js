@@ -15,7 +15,7 @@ app.use('/file', express.static(path.join(__dirname, 'upload')));
 
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "index.html"));
+    res.sendFile(path.join(__dirname, "/public/html/main.html"));
   });
 
 app.get("/smart_main", (req, res) => {
@@ -38,7 +38,7 @@ const fs = require('fs');
 // fs.mkdirSync(uploadDir); // 'uploads' 폴더가 없으면 생성
 // }
 const upload_url="upload/";
-const chat_upload_url="upload2/";
+const chat_upload_url="C:/Users/HP/saltware/dataset";
 
 const uploadDirs = [upload_url,chat_upload_url];
 
@@ -61,6 +61,7 @@ const storage = multer.diskStorage({
     if(upload_type=="chat_upload"){
       upload_dir = chat_upload_url;
     }
+    console.log(upload_dir);
     cb(null, upload_dir); // 파일이 저장될 디렉토리
   },
   filename: (req, file, cb) => {
@@ -123,7 +124,6 @@ app.post('/api/upload', upload.single('uploadfiles'), (req, res) => {
     if (!req.file) {
         return res.status(400).send('No file uploaded.');
     }
-
     res.json({ state: 'success', data: parseFile(req.file)});
   }, uploadErrorHandler);
 
@@ -142,9 +142,9 @@ app.post('/api/uploads', upload.array('uploadfiles',12), (req, res) => {
 // 파일 업로드 에러 핸들러
 function uploadErrorHandler(err, req, res, next) {
 let msg = err;  
+console.log("여기"+err);
 if (err instanceof multer.MulterError) {
   // Multer 에러 처리
-  console.log(err.code);
   if (err.code === 'LIMIT_FILE_SIZE') {
     msg = ` 최대 파일 크기 ${fileSize}MB를 초과하였습니다.`;  
   }else if (err.code === 'LIMIT_FILE_TYPE') {
