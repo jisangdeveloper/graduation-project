@@ -558,17 +558,19 @@
                   <img src="/img/raw.png" alt="File Icon 3">
               </div>
               
-              <div id="drop-area" class="upload-box">
-                  Drag a file here or <input type="file" id="chat_input_file" multiple hidden /> 
-                  <label for="input_file" style="cursor: pointer; color: #3b82f6;">browse</label> for a file to upload.
+              <div id="chat_drop_area" class="upload-box drop-area" data-upload_url="chat_upload">
+                  Drag a file here or <input type="file" id="chat_input_file" class="input_file" data-upload_url="chat_upload" multiple hidden /> 
+                  <label for="chat_input_file" style="cursor: pointer; color: #3b82f6;">browse</label> for a file to upload.
               </div>
               
-              <!-- 업로드 후 파일 링크 표시 -->
-              <div id="chat-link-box">
+              <div id="loadingOverlay" class="hidden">
+                <p>업데이트 중</p>
               </div>
+             
             </div>
             <div style="margin-top: 30px;">
               <span class="title">파일 리스트</span>
+              <ul id="fileList"></ul> <!-- 파일 리스트가 여기에 추가됩니다 -->
             </div>
           </div>
           <div id="chat_wrap">
@@ -604,8 +606,8 @@
               <img src="/img/raw.png" alt="File Icon 3">
           </div>
           
-          <div id="drop-area" class="upload-box">
-              Drag a file here or <input type="file" id="input_file" multiple hidden /> 
+          <div id="drop_area" class="upload-box drop-area" data-upload_url="upload">
+              Drag a file here or <input type="file" id="input_file" class="input_file" data-upload_url="upload" multiple hidden /> 
               <label for="input_file" style="cursor: pointer; color: #3b82f6;">browse</label> for a file to upload.
           </div>
           
@@ -614,18 +616,17 @@
               
           </div>
         </div>
-        <!-- 팝업(업로드 중) -->
-        <div id="uploadPopup" class="popup hidden">
-          <div class="popup-content">
-              <span id="closePopup" class="close-btn">&times;</span>
-              <p>업로드 중입니다</p>
-          </div>
-        </div>
+    
       </section> 
     </div>
-
+    <!-- 팝업(업로드 중) -->
+    <div id="uploadPopup" class="popup hidden">
+      <div class="popup-content">
+          <span id="closePopup" class="close-btn">&times;</span>
+          <p>업로드 중입니다</p>
+      </div>
+    </div>
  
-
 
     <!-- Footer Section Start -->
     <footer id="footer" class="py-3 text-center text-light">
@@ -667,14 +668,106 @@
 
           // 클릭된 메뉴에 해당하는 콘텐츠만 표시
           const contentId = this.getAttribute('data-content');
-          console.log(contentId);
+          // console.log(contentId);
           document.getElementById(contentId).style.display = 'block';
         });
       });
     </script>
       <!-- chat -->
       <script type="text/javascript" src="js/chatbot.js"></script>
+      <script src="js/fileUploader.js"></script>
       <!-- file upload -->
-      <script type='text/javascript' src='js/upload.js'></script>
+      <!-- <script type='text/javascript' src='js/upload.js'></script>
+      <script type='text/javascript' src='js/chat_upload.js'></script> -->
+      <!-- <script type='text/javascript' src='js/upload_all.js'></script> -->
+      <script>
+      const loadingOverlay = document.getElementById("loadingOverlay");  
+      // showPopup() {
+      //   loadingOverlay.classList.remove('hidden'); // 팝업 표시
+      // }
+
+      // closePopup() {
+        
+      // }
+      document.addEventListener('DOMContentLoaded', () => {
+               // 첫 번째 업로더 인스턴스
+          const uploader1 = new FileUploader(
+              'drop_area',
+              'input_file',
+              'link-box',
+              true, // 다중 업로드
+              'upload',
+              'uploadPopup',
+              'closePopup'
+          );
+          // 두 번째 업로더 인스턴스
+          const uploader2 = new FileUploader(
+              'chat_drop_area',
+              'chat_input_file',
+              null, // linkBox 사용 안 함
+              true, // 다중 업로드
+              'chat_upload',
+              'loadingOverlay',
+              'closePopup',
+              ()=>sendGetRequest()
+          );
+
+          // 클래스 외부에서 GET 요청 처리
+        async function sendGetRequest(url="http://192.168.110.52:8000/temp/update") {
+          try {
+              // loadingOverlay.classList.remove('hidden'); // 팝업 숨기기
+              uploader2.showPopup();
+              const response = await fetch(url, {
+                  method: 'GET'
+              });
+              const data = await response.json();
+              uploader2.closePopup();
+              return data;  // 데이터를 반환
+          } catch (error) {
+            uploader2.closePopup();
+            return null;
+          }
+        }
+        async function getFileList() {
+            try {
+                // 서버에서 파일 리스트 받아오기
+                const fileList = await sendGetRequest("http://192.168.110.52:8000/temp/list");
+                
+                // 받아온 파일 리스트를 콘솔에 출력
+                console.log(fileList);
+                
+                // 파일 리스트를 렌더링하는 함수 호출
+                renderFileList(fileList['data']);
+            } catch (error) {
+                console.log('파일 리스트를 가져오는 중 오류 발생:', error);
+            }
+        }
+
+        // 파일 리스트를 렌더링하는 함수
+        function renderFileList(files) {
+            const fileListTag = document.getElementById('fileList');
+
+            // 파일 리스트를 비움 (기존 내용을 지우고 새로 추가)
+            fileListTag.innerHTML = '';
+
+            // 파일 데이터를 순회하면서 리스트 항목 생성
+            files.forEach(file => {
+                console.log(file);
+                const listItem = document.createElement('li');
+                // 파일명을 span으로 생성
+                const fileNameSpan = document.createElement('span');
+                fileNameSpan.textContent = file.filename;
+
+                listItem.appendChild(fileNameSpan);
+                fileListTag.appendChild(listItem);
+            });
+        }
+        
+
+        getFileList();//파일리스트 가져오기
+       });
+      
+    
+    </script>
   </body>
 </html>

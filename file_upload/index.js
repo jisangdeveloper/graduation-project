@@ -30,6 +30,7 @@ fs.mkdirSync(uploadDir); // 'uploads' 폴더가 없으면 생성
 // 파일 저장 경로 및 파일명 설정
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    console.log(1111);
     cb(null, 'upload/'); // 파일이 저장될 디렉토리
   },
   filename: (req, file, cb) => {

@@ -33,21 +33,42 @@ app.get('/file-upload', (req, res) => {
 
 // 업로드된 파일들을 저장할 폴더 설정
 const fs = require('fs');
-const uploadDir = './upload';
-if (!fs.existsSync(uploadDir)) {
-fs.mkdirSync(uploadDir); // 'uploads' 폴더가 없으면 생성
-}
+// const uploadDir = './upload';
+// if (!fs.existsSync(uploadDir)) {
+// fs.mkdirSync(uploadDir); // 'uploads' 폴더가 없으면 생성
+// }
+const upload_url="upload/";
+const chat_upload_url="upload2/";
+
+const uploadDirs = [upload_url,chat_upload_url];
+
+uploadDirs.forEach(dir => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true }); // 폴더가 없으면 생성
+  }
+});
+
 
 
 // 파일 저장 경로 및 파일명 설정
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'upload/'); // 파일이 저장될 디렉토리
+    const upload_type = req.body.upload_type;
+    // console.log(upload_type);
+    //업로드 타입에 따라 업로드 경로 설정
+    let upload_dir = upload_url;
+    
+    if(upload_type=="chat_upload"){
+      upload_dir = chat_upload_url;
+    }
+    cb(null, upload_dir); // 파일이 저장될 디렉토리
   },
   filename: (req, file, cb) => {
+
   const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+  const utf8FileName = Buffer.from(file.originalname, 'latin1').toString('utf8');
         // 파일 이름을 Buffer로 받아 UTF-8로 변환
-   cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname)); // 저장되는 파일명 설정
+   cb(null, utf8FileName); // 저장되는 파일명 설정
   }
 });
 

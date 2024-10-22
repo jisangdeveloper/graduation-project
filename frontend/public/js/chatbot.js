@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     //기본 멘트
     addMessageToChat('ai_assistant', '안녕하세요!! 강서폴리텍대학교 스마트금융과 챗봇입니다.'); //응답이 유효하지 않음
 
-
     chatForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         const userInput = chatInput.value.trim();
