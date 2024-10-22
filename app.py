@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+
 # 사용자 질문에 답변을 제공하는 AI 챗봇 시스템을 구축하는 Python 프로그램
 
 ########################### 라이브러리 선언 ###########################
@@ -35,8 +39,9 @@ from cachetools import TTLCache # Time-To-Live 캐시 제공
 
 ### 비동기 작업 및 FastAPI 서버 관련 라이브러리
 from fastapi import FastAPI, BackgroundTasks, HTTPException # FastAPI와 비동기 작업을 위한 BackgroundTasks 라이브러리
-from fastapi.middleware.cors import CORSMiddleware  # CORS 미들웨어
 from fastapi.responses import JSONResponse #임시 
+# from fastapi import File, UploadFile, Depends  # 세션
+from fastapi.middleware.cors import CORSMiddleware  # CORS 미들웨어 
 from pydantic import BaseModel  # 데이터 유효성 검사를 위한 Pydantic 모델 
 from pyngrok import ngrok  # ngrok을 통해 로컬 서버를 공개
 import uvicorn  # ASGI 서버 실행
@@ -46,6 +51,11 @@ import requests
 
 ### 사용자 정의 함수 관련 라이브러리
 from commonFunc.ragFunc import cf # 함수 모음
+
+# ### 세션 (from fastapi 쪽에 File 부터도 추가함)
+# import uuid  # 세션 관리용 UUID 생성
+# from tempfile import TemporaryDirectory
+# from typing import List
 
 ########################### 1. 파라미터 설정 ###########################
 
@@ -63,6 +73,9 @@ type_col = 'type'
 
 # parameters 리스트를 DataFrame에서 가져오기
 parameters = df[parameter_col].tolist()
+df.head(2)
+
+
 
 # df의 parameter 값을 코드 형태 문자열로 변환 및 코드 실행
 try:
@@ -77,14 +90,15 @@ try:
             for _, row in df.iterrows()
         ])
 
-        exec(variable_declarations)  # variable_declarations에 저장된 코드 선언
+        exec(variable_declarations)  # variable_declarations에 저장된 코드 실행
     else:
         raise ValueError("does not contain all required parameters.")
 except Exception as e:
     print(e)
 
+
 ### cache 디렉토리 생성
-os.makedirs(embeddings_dir, exist_ok = True) # 같은 텍스트를 다시 임베딩할 때 시간을 절약하기 위해 캐시 사용
+os.makedirs(cache_dir, exist_ok = True) # 같은 텍스트를 다시 임베딩할 때 시간을 절약하기 위해 캐시 사용
 
 # 대화 기록 메모리 캐시 설정
 cache = TTLCache(
@@ -92,8 +106,10 @@ cache = TTLCache(
                 ttl = cache_time # cache 유지 시간(초)
                 )
 
-# 대화 내용이 저장된 리스트 초기화
+# 대화 내용이 저장된 리스트 초기화(선언)
 conversation_history = [] 
+
+
 
 ########################### 2. LLM 모델 호출 ###########################
 ollama = Ollama(
@@ -111,19 +127,22 @@ embeddings = HuggingFaceEmbeddings(
                                     encode_kwargs=encode_kwargs,
                                     )
 
+
+
 ########################### 3. 벡터DB 호출 ###########################
 vectorstore = Chroma(
                     embedding_function = embeddings, # 임베딩 함수 설정
                     persist_directory = db_dir, # 벡터 저장 디렉토리 경로 설정
-                    collection_name = "durian" # 컬렉션 이름 설정. 이 프로젝트에서는 컬렉션 1개만 사용
+                    collection_name = collection_name # 컬렉션 이름 설정. 이 프로젝트에서는 컬렉션 1개만 사용
                     )
 
-### 검색기
-retriever = vectorstore.as_retriever( # 벡터 저장소를 검색기로 변환
-                                    search_type = "mmr", # Maximum Marginal Relevance (MMR)
-                                    # vervose=True, # 상세한 출력을 활성화하는 매개변수
-                                    search_kwargs = {'k': sources_num, 'lambda_mult': 0.7} # 출력 개수 sources_num, 일관성 정도 설정(1에 가까울 수록 일관적인 답변 반환)
-                                    )
+user_vectorstore = Chroma(
+    embedding_function = embeddings, # 임베딩 함수 설정
+    persist_directory = user_db_dir, # 벡터 저장 디렉토리 경로 설정
+    collection_name = user_collection_name # 컬렉션 이름 설정. 이 프로젝트에서는 컬렉션 1개만 사용
+)
+
+
 
 ########################### 4. API 서버 기동 (FastAPI) ###########################
 ### FastAPI 웹서버 설정 & 사용자 요청 처리
@@ -148,6 +167,9 @@ app.add_middleware(
 ### FastAPI 연계 확인을 위한 데이터 모델 정의
 class Input(BaseModel):
     input: str # 사용자 입력 저장 필드
+
+
+
 
 ########################### 5. 서버 기동상태 확인 ###########################
 ### 연결 확인용 엔드포인트
@@ -181,25 +203,26 @@ async def update():
         # 새로운 PDF 파일로 검색기 생성
         retriever = cf.make_new_retriever(
             filelist_path,
-            backup_filelist_path,
             org_dir,
             new_files,
-            embeddings_dir,
-            embeddings,
             chunk_size,
             chunk_overlap,
             sources_num,
-            db_dir,
             token_model,
-            collection_name,
+            vectorstore,
+            user_vectorstore
         )
 
         if retriever is None:  # retriever가 생성되지 않은 경우
+            cf.restore_backup(filelist_path, backup_filelist_path)
             return {"message": "update failed during retriever creation"}
 
         update_end_time = time.time()
         update_duration = update_end_time - update_start_time  # 전체 업데이트 소요 시간
         print(f"전체 업데이트 소요 시간: {update_duration:.2f} 초")
+
+        if os.path.exists(backup_filelist_path):
+            os.remove(backup_filelist_path)  # 백업 파일 삭제
 
         return {"message": "update complete"}
 
@@ -207,92 +230,71 @@ async def update():
         cf.restore_backup(filelist_path, backup_filelist_path)
         return {"message": f"update failed. {e}"}
 
-@app.get("/temp/list")
-async def temp_list():
+
+
+### 유저가 업로드 한 파일 업데이트
+@app.get("/user-update")
+async def userUpdate():
     global retriever
-
-    # state 값을 추가한 JSON 응답 생성
-    responseContent = {
-        "state": "success",
-        "data": None  
-    }
-
-    try:
-        # DataFrame을 딕셔너리로 변환
-        df = pd.read_csv(".cache/filelist.csv")
-        if len(df) != 0:
-            responseContent["data"] = df.to_dict(orient='records')  # 각
-        else:
-            responseContent["state"] = "fail"
-            responseContent["data"] = {"filename":"현재 저장된 파일이 없습니다."}
-
-        return JSONResponse(content=responseContent)
-    
-    except FileNotFoundError as e:  # 파일이 없는 경우의 예외 처리
-        responseContent["state"] = "fail"
-        responseContent["data"] = {"filename":"현재 저장된 파일이 없습니다."}
-        return JSONResponse(content=responseContent)
-    except Exception as e:
-        responseContent["state"] = "err"
-        responseContent["data"] = str(e)
-        return JSONResponse(content=responseContent)
         
-@app.get("/temp/update")
-async def temp_update():
-    global retriever
-    # DataFrame을 딕셔너리로 변환
+    # user_filelist_path = "./.cache/user_filelist.csv"
+    # backup_user_filelist_path = "./.cache/user_filelist.csv.bak"
+    # user_dir = "../user_dataset"
+    # user_db_dir = "./user_chroma_db"
+
     # state 값을 추가한 JSON 응답 생성
     responseContent = {
         "state": "success",
         "data": None  
     }
+
     try:
         update_start_time = time.time()  # 업데이트 시작 시간
+
         # PDF 파일을 업로드 한 경우
-        if not cf.check_files_in_folder(org_dir):  # org_dir 폴더에 파일이 없는 경우
-            return {"message": "no files in org_dir"}
+        if not cf.check_files_in_folder(user_dir):  # org_dir 폴더에 파일이 없는 경우
+            return {"message": "no files in user_dir"}
 
-        # filelist.csv로드
-        if os.path.exists(filelist_path):
-            shutil.copyfile(filelist_path, backup_filelist_path)
+        # 현재 filelist.csv의 백업 생성
+        if os.path.exists(user_filelist_path):
+            shutil.copyfile(user_filelist_path, backup_user_filelist_path)
 
-        new_files = cf.get_new_pdf_files(org_dir, filelist_path)  # 새로운 PDF 파일 목록 가져오기
+        new_files = cf.get_new_pdf_files(user_dir, user_filelist_path)  # 새로운 PDF 파일 목록 가져오기
 
         # 새로운 파일이 없는 경우
         if len(new_files) == 0:
-            cf.restore_backup(filelist_path, backup_filelist_path)
+            cf.restore_backup(user_filelist_path, backup_user_filelist_path)
             responseContent["state"] = "err"
             responseContent["data"] = "기존에 업로드된 pdf파일입니다."
             return JSONResponse(content=responseContent)
-           
 
         # 새로운 PDF 파일로 검색기 생성
         retriever = cf.make_new_retriever(
-            filelist_path,
-            backup_filelist_path,
-            org_dir,
+            user_filelist_path,
+            user_dir,
             new_files,
-            embeddings_dir,
-            embeddings,
             chunk_size,
             chunk_overlap,
             sources_num,
-            db_dir,
             token_model,
-            collection_name,
+            vectorstore,
+            user_vectorstore
         )
 
         if retriever is None:  # retriever가 생성되지 않은 경우
+            cf.restore_backup(filelist_path, backup_filelist_path)
             return {"message": "update failed during retriever creation"}
 
         update_end_time = time.time()
         update_duration = update_end_time - update_start_time  # 전체 업데이트 소요 시간
         print(f"전체 업데이트 소요 시간: {update_duration:.2f} 초")
-        
+
+        if os.path.exists(backup_filelist_path):
+            os.remove(backup_filelist_path)  # 백업 파일 삭제
 
         try:
             # DataFrame을 딕셔너리로 변환
-            df = pd.read_csv(".cache/filelist.csv")
+            df = pd.read_csv(user_filelist_path)
             if len(df) != 0:
                 responseContent["data"] = df.to_dict(orient='records')  # 각
             else:
@@ -309,19 +311,54 @@ async def temp_update():
             responseContent["state"] = "err"
             responseContent["data"] = str(e)
             return JSONResponse(content=responseContent)
-        
+
     except Exception as e:
         cf.restore_backup(filelist_path, backup_filelist_path)
         responseContent["state"] = "err"
         responseContent["data"] = str(e)
         return JSONResponse(content=responseContent)
 
+## temp
+@app.get("/list")
+async def list():
+    global retriever
+
+    # state 값을 추가한 JSON 응답 생성
+    responseContent = {
+        "state": "success",
+        "data": None  
+    }
+
+    try:
+        # DataFrame을 딕셔너리로 변환
+        df = pd.read_csv(user_filelist_path)
+        if len(df) != 0:
+            responseContent["data"] = df.to_dict(orient='records')  # 각
+        else:
+            responseContent["state"] = "fail"
+            responseContent["data"] = {"filename":"현재 저장된 파일이 없습니다."}
+
+        return JSONResponse(content=responseContent)
+    
+    except FileNotFoundError as e:  # 파일이 없는 경우의 예외 처리
+        responseContent["state"] = "fail"
+        responseContent["data"] = {"filename":"현재 저장된 파일이 없습니다."}
+        return JSONResponse(content=responseContent)
+    except Exception as e:
+        responseContent["state"] = "err"
+        responseContent["data"] = str(e)
+        return JSONResponse(content=responseContent)
 
 ### 사용자의 질문에 대한 응답을 처리하는 엔드포인트 
 @app.post("/answer", status_code=200)
 async def answer(x: Input, background_tasks: BackgroundTasks):
     global retriever
-    
+    # global user_retriever
+
+    # ensemble_retriever = EnsembleRetriever(
+    #     retrievers=[retriever, user_retriever], weights=[0.5, 0.5]
+    # )
+
     user_input = x.input # 사용자 입력
     cf.add_history(conversation_history, 'user', user_input ) # 사용자 입력을 대화 히스토리에 추가
 
@@ -339,6 +376,7 @@ async def answer(x: Input, background_tasks: BackgroundTasks):
     # 대화 기록을 참고한 검색기 생성
     history_aware_retriever = create_history_aware_retriever(
                                                                 ollama, # LLM 모델 
+                                                                # ensemble_retriever,# 검색기
                                                                 retriever,# 검색기
                                                                 contextualize_q_prompt # 시스템 프롬프트 템플릿 
                                                             )
@@ -456,6 +494,8 @@ async def answer(x: Input, background_tasks: BackgroundTasks):
 
     return response_data
 
+
+
 ########################### 6. 화면 요청에 따른 응답 처리 ###########################
 ### 서버 실행
 if __name__ == "__main__":
@@ -464,4 +504,10 @@ if __name__ == "__main__":
     # ngrokTunnel = ngrok.connect(8000)  # ngrok을 통해 로컬 서버를 공개하고 터널 생성
     # print("Public URL:", ngrokTunnel.public_url)  # ngrok 터널을 통해 접근할 수 있는 공개 URL 출력
     nest_asyncio.apply()  # 비동기 작업 관련 오류 방지를 위해 nest_asyncio 적용
-    uvicorn.run(app,host="0.0.0.0", port=8000)  # uvicorn을 사용하여 FastAPI 서버 실행
+    uvicorn.run(app, port=8000)  # uvicorn을 사용하여 FastAPI 서버 실행
+
+
+
+
+
+
