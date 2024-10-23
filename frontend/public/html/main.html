@@ -719,7 +719,6 @@
                 const listItem = document.createElement('li');
                 const fileNameSpan = document.createElement('span');
                 fileNameSpan.textContent = file.filename;
-
                 listItem.appendChild(fileNameSpan);
                 fileListTag.appendChild(listItem);
             });
@@ -736,7 +735,7 @@
               if (fileList['state']=='success' && fileList['data']) {
                 renderFileList(fileList['data']);
               }else if(fileList['state']=='fail') {
-                renderFileList(fileList['data']);
+                renderFileList([fileList['data']]); //filename: "현재 저장된 파일이 없습니다."
               }else{
                 alert(fileList['data']);
               }

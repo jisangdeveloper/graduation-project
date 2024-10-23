@@ -142,7 +142,6 @@ app.post('/api/uploads', upload.array('uploadfiles',12), (req, res) => {
 // 파일 업로드 에러 핸들러
 function uploadErrorHandler(err, req, res, next) {
 let msg = err;  
-console.log("여기"+err);
 if (err instanceof multer.MulterError) {
   // Multer 에러 처리
   if (err.code === 'LIMIT_FILE_SIZE') {
