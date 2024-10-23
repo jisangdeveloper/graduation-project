@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const chatForm = document.getElementById('chat-form');
     const chatInput = document.getElementById('chat-input');
     const chatContainer = document.getElementById('chat-container');
-    const url = "http://192.168.110.52:8000/answer";
+    const url = "http://localhost:8000/answer";
 
 
     //기본 멘트

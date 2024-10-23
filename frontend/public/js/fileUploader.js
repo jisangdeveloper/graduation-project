@@ -1,9 +1,11 @@
 class FileUploader {
-    constructor(dropAreaId, fileElemId, linkBoxId, isMultiple, uploadType, popupId, closeBtnId,callback) {
+    constructor({uploadUrl,dropAreaId, fileElemId, linkBoxId, isMultiple, uploadType, popupId, closeBtnId,callback}) {
+        this.uploadUrl = uploadUrl;
         this.dropArea = document.getElementById(dropAreaId);
         this.fileElem = document.getElementById(fileElemId);
         this.linkBox = document.getElementById(linkBoxId);
-        this.uploadUrl = this.fileType(isMultiple);
+
+        this.fileType(isMultiple)
         this.uploadType = uploadType;
         this.uploadPopup = document.getElementById(popupId);
         this.btnClosePopup = document.getElementById(closeBtnId);
@@ -16,7 +18,7 @@ class FileUploader {
     // 파일 타입 설정
     fileType(isMultiple) {
         this.fileElem.multiple = isMultiple;
-        return isMultiple ? '/api/uploads' : '/api/upload';
+        // return isMultiple ? '/api/uploads' : '/api/upload';
     }
 
     // 이벤트 리스너 초기화
@@ -60,7 +62,7 @@ class FileUploader {
     async handleFiles(files, callback = null) {
         const formData = new FormData();
         formData.append("upload_type", this.uploadType);
-        console.log(this.uploadType);
+        // console.log(this.uploadType);
         for (let file of files) {
             formData.append('uploadfiles', file); // 서버에서 받을 필드명과 일치해야 함
         }

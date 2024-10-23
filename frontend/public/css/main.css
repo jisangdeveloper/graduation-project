@@ -930,6 +930,13 @@ font-size: 14px;
   margin-bottom: 30px;
 }
 
+
+@media (max-width: 552px) {
+  .navbar-brand img{
+    width: 35%;
+  }
+}
+
 @media (min-width: 553px) {
   #navBar{
     display: block;
@@ -951,6 +958,6 @@ font-size: 14px;
     margin-left:20px;
   }
   .navbar-brand img{
-    width: 70%;
+    width: 55%;
   }
 }
