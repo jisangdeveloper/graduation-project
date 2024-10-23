@@ -323,9 +323,9 @@ height: 40px;
   
 
 .container {
-max-width: 1200px;
 margin: 0 auto;
 padding: 0 20px;
+max-width: 1500px;
 }
 
 #main-content {
@@ -928,4 +928,29 @@ font-size: 14px;
 }
 #app{
   margin-bottom: 30px;
+}
+
+@media (min-width: 553px) {
+  #navBar{
+    display: block;
+  }
+  .navbar{
+    height:140px;
+  }
+  .navbar-toggler{
+    display: none;
+  }
+  .container{
+    flex-wrap: nowrap !important;
+  }
+  .navbar-nav{
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  a.nav-link{
+    margin-left:20px;
+  }
+  .navbar-brand img{
+    width: 70%;
+  }
 }

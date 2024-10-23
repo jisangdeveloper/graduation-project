@@ -6,6 +6,10 @@ const express = require("express");
 const app = express();
 const server = http.createServer(app);
 
+
+const upload_url="upload/";
+const chat_upload_url="upload2/";
+
 // Express.js와 같은 Node.js 서버를 사용할 때, 정적 파일(CSS, JS, 이미지 등)을 올바르게 제공하기 위해 express.static 미들웨어를 사용
 // 이 미들웨어를 통해 특정 디렉토리를 "정적 파일"로 서빙하도록 설정할 수 있음
 app.use(express.static(path.join(__dirname, "public")));
@@ -37,8 +41,7 @@ const fs = require('fs');
 // if (!fs.existsSync(uploadDir)) {
 // fs.mkdirSync(uploadDir); // 'uploads' 폴더가 없으면 생성
 // }
-const upload_url="upload/";
-const chat_upload_url="C:/Users/HP/saltware/dataset";
+
 
 const uploadDirs = [upload_url,chat_upload_url];
 
